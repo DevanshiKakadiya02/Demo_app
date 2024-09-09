@@ -1,0 +1,51 @@
+<%= form_with model: @order, local: true do |f| %>
+  <div>
+    <h3>Order Form</h3>
+    <div>
+      <%= f.label :delivery_zipcode %>
+      <%= f.text_field :delivery_zipcode %>
+    </div>
+    <div>
+      <%= f.label :delivery_state %>
+      <%= f.text_field :delivery_state %>
+    </div>
+    <div>
+      <%= f.label :delivery_city %>
+      <%= f.text_field :delivery_city %>
+    </div>
+    <div>
+      <%= f.label :delivery_area %>
+      <%= f.text_field :delivery_area %>
+    </div>
+    <div>
+      <%= f.label :delivery_address %>
+      <%= f.text_field :delivery_address %>
+    </div>
+
+    <h3>Item Information</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Item Name</th>
+					<th>Quntity</th>
+					<th>Price</th>
+					<th>Total Amountß</th>
+				</tr
+			</thead>
+			<tbody>
+			<div id="items">			
+				<%= f.fields_for :order_items do |item_form| %>
+					<%= render 'order_item_fields', f: item_form %>
+				<% end %>
+				<%= link_to_add_association "Add More Item", f, :order_items %>
+    	</div>
+			</tr>
+			</tbody>
+		</table>
+
+
+    <div>
+      <%= f.submit "Submit Order" %>
+    </div>
+  </div>
+<% end %>
