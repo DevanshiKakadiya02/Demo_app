@@ -7,19 +7,13 @@ import * as bootstrap from "bootstrap"
 
 
 $(document).ready(function() {
-  $('body').on('keyup', '.price', function(){
+  $('body').on('keyup', '.price, .quantity', function() {
     var raw = $(this).closest('.row');
-    var price = $(this).val();
-    var quantity = raw.find('.quantity').val();
-    raw.find('.amount').val(price * quantity);
-    tax();
-  });
-
-  $('body').on('keyup', '.quantity', function(){
-    var raw = $(this).closest('.row');
-    var quantity = $(this).val();
     var price = raw.find('.price').val();
-    raw.find('.amount').val(price * quantity);
+    var quantity = raw.find('.quantity').val();
+    var amount = price * quantity;
+    raw.find('.amount').val(amount)
+    raw.find('.amount_display').text(amount);
     tax();
   });
 
@@ -31,21 +25,11 @@ $(document).ready(function() {
       data: { zipcode: zipcode },
       dataType: 'json',
       success: function(data) {
-        if (data) {
-          $('#city').val(data.city || '');
-          $('#state').val(data.state || '');
-          $('#area').val(data.area || '');
-        } else {
-          $('#city').val('');
-          $('#state').val('');
-          $('#area').val('');
-        }
+        updateAddressFields(data);
       },
       error: function(xhr, status, error) {
-        console.log("Error: " + error);
-        $('#city').val('');
-        $('#state').val('');
-        $('#area').val('');
+        console.error("Error: " + error);
+        resetAddressFields();
       }
     });
   });
@@ -62,6 +46,24 @@ function tax() {
   console.log('tax', tax);
   $('#order_total').html(total);
   $('#order_tax').html(tax);
-  $('#order_total_amount').html(total + total);
+  $('#order_total_amount').html(total + tax);
   $('#order_tax_field').val(tax);
+}
+
+function updateAddressFields(data) {
+  var city = data.city || '';
+  var state = data.state || '';
+  var area = data.area || '';
+
+  $('#city').val(city);
+  $('#state').val(state);
+  $('#area').val(area);
+  $('#city_display').text(city);
+  $('#state_display').text(state);
+  $('#area_display').text(area);
+}
+
+function resetAddressFields() {
+  $('#city, #state, #area').val('');
+  $('#city_display, #state_display, #area_display').text('');
 }

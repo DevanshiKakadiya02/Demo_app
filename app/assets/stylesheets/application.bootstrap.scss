@@ -1,25 +1,2 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
-
-.Table {
-  display: table;
-  display: table-row;
-}
-
-.Cell {
-  display: table-cell;
-  padding: 10px;
-  text-align: left;
-}
-
-.Row {
-  display: table-row;
-}
-
-.Row:hover {
-  background-color: #f1f1f1;
-}
-
-.Heading .Cell {
-  font-weight: bold;
-}

@@ -18,7 +18,8 @@
               <%= f.label :delivery_state, "State", class: "font-weight-bold" %>
             </div>
             <div class="col-md-4">
-              <%= f.text_field :delivery_state, class: "form-control", id: 'state'%>
+              <div id="state_display"><%= f.object.delivery_state %></div>
+              <%= f.hidden_field :delivery_state, class: "form-control", id: 'state'%>
             </div>
           </div>
 
@@ -27,7 +28,8 @@
               <%= f.label :delivery_city, "City", class: "font-weight-bold" %>
             </div>
             <div class="col-md-4">
-              <%= f.text_field :delivery_city, class: "form-control", id: 'city' %>
+              <div id="city_display"><%= f.object.delivery_state %></div>
+              <%= f.hidden_field :delivery_city, class: "form-control", id: 'city' %>
             </div>
           </div>
 
@@ -36,7 +38,8 @@
               <%= f.label :delivery_area, "Area", class: "font-weight-bold" %>
             </div>
             <div class="col-md-4">
-              <%= f.text_field :delivery_area, class: "form-control", id: 'area'%>
+              <div id="area_display"><%= f.object.delivery_state %></div>
+              <%= f.hidden_field :delivery_area, class: "form-control", id: 'area'%>
             </div>
           </div>
 

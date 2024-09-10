@@ -1,6 +1,6 @@
 <div class="row mb-2 item-fields">
   <div class="col-md-3">
-    <%= f.select :sku_code, SoukoZaiko.pluck(:sku_code, :sku_code).uniq, prompt: 'Choose a SKU', class: "form-control" %>
+    <%= f.select :sku_code, options_for_select(SoukoZaiko.all.map { |zaiko| ["#{zaiko.sku_code} [#{zaiko.stock}]", zaiko.sku_code, { disabled: zaiko.stock == 0 }] }), prompt: 'Choose a SKU', class: "form-control" %>
   </div>
   <div class="col-md-3">
     <%= f.number_field :quantity, class: 'quantity form-control' %>
@@ -9,6 +9,7 @@
     <%= f.number_field :price, class: 'price form-control' %>
   </div>
   <div class="col-md-3">
-    <%= f.number_field :total_amount, class: 'amount form-control' %>
+    <div class="amount_display"><%= f.object.total_amount %></div>
+    <%= f.hidden_field :total_amount, class: 'amount form-control' %>
   </div>
 </div>
