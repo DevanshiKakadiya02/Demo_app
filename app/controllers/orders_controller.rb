@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
 	private
 
 	def order_params
-		params.require(:order).permit(:delivery_zipcode, :delivery_state, :delivery_city, :delivery_area, :delivery_address, order_items_attributes: [:id, :sku_code, :quantity	, :price, :total_amount, :_destroy])
+		params.require(:order).permit(:delivery_zipcode, :delivery_state, :delivery_city, :delivery_area, :delivery_address, :tax, order_items_attributes: [:id, :sku_code, :quantity	, :price, :total_amount, :_destroy])
 	end
 end
   

@@ -20,6 +20,7 @@
     <div>
       <%= f.label :delivery_address %>
       <%= f.text_field :delivery_address %>
+      <%= f.hidden_field :tax, id: 'order_tax_field' %>
     </div>
 
     <h3>Item Information</h3>
@@ -38,22 +39,20 @@
 				<%= link_to_add_association "Add More Item", f, :order_items %>
     	</div>
     </div>
-		<table>
-			<thead>
-				<tr>
-					<th>Item Name</th>
-					<th>Quntity</th>
-					<th>Price</th>
-					<th>Total Amountß</th>
-				</tr>
-			</thead>
-			<tbody>
-			
-			</tr>
-			</tbody>
-		</table>
-
-
+    <table>
+      <tr>
+        <td>Total</td>
+        <td id='order_total'>0</td>
+      </tr>
+      <tr>
+        <td>Tax 10%</td>
+        <td id='order_tax'>0</td>
+      </tr>
+      <tr>
+        <td>Total Amount</td>
+        <td id='order_total_amount'>0</td>
+      </tr>
+    </table>
     <div>
       <%= f.submit "Submit Order" %>
     </div>
