@@ -1,10 +1,8 @@
-<tr>
-	<div class="item-fields">
-		<%= index = "#{f.index}-#{Random.rand(100)}" %>
-		<td><%= f.select :sku_code, SoukoZaiko.pluck(:sku_code, :id), prompt: 'Choose a category' %></td>
-		<td><%= f.number_field :quantity, class: 'quantity', 'data-id': index, id: "quantity#{index}" %></td>
-		<td><%= f.number_field :price, class: 'price', 'data-id': index, id: "price#{index}" %></td>
-		<td><%= f.number_field :total_amount, class: 'amount', id: "amount#{index}" %></td>
-		<td><%= f.hidden_field :_destroy %></td>
-	</div>
-</tr>
+<div class="Row item-fields">
+  <% index = "#{f.index}-#{Random.rand(100)}" %>
+  <div class="Cell"><%= f.select :sku_code, SoukoZaiko.pluck(:sku_code, :id), prompt: 'Choose a category' %></div>
+  <div  class="Cell"><%= f.number_field :quantity, class: 'quantity'%></div>
+  <div  class="Cell"><%= f.number_field :price, class: 'price' %></div>
+  <div  class="Cell"><%= f.number_field :total_amount, class: 'amount' %></div>
+  <div  class="Cell"><%= f.hidden_field :_destroy %></div>
+</div>

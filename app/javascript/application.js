@@ -8,7 +8,7 @@ import * as bootstrap from "bootstrap"
 
 $(document).ready(function() {
   $('body').on('keyup', '.price', function(){
-    var raw = $(this).closest('div')
+    var raw = $(this).closest('.Row');
     var price = $(this).val();
     var quantity = raw.find('.quantity').val();
     raw.find('.amount').val(price * quantity)
@@ -17,7 +17,7 @@ $(document).ready(function() {
   });
 
   $('body').on('keyup', '.quantity', function(){
-    var raw = $(this).closest('div')
+    var raw = $(this).closest('.Row');
     var quantity = $(this).val();
     var price = raw.find('.price').val();
     raw.find('.amount').val(price * quantity)
