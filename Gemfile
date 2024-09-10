@@ -67,6 +67,7 @@ group :development do
   gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
 end
 
-gem "cocoon"
+gem 'cocoon'
 gem 'devise', '~> 4.9'
+gem 'jpostcode'
 gem 'jquery-rails'

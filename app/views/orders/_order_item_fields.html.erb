@@ -1,8 +1,14 @@
-<div class="Row item-fields">
-  <% index = "#{f.index}-#{Random.rand(100)}" %>
-  <div class="Cell"><%= f.select :sku_code, SoukoZaiko.pluck(:sku_code, :id), prompt: 'Choose a category' %></div>
-  <div  class="Cell"><%= f.number_field :quantity, class: 'quantity'%></div>
-  <div  class="Cell"><%= f.number_field :price, class: 'price' %></div>
-  <div  class="Cell"><%= f.number_field :total_amount, class: 'amount' %></div>
-  <div  class="Cell"><%= f.hidden_field :_destroy %></div>
+<div class="row mb-2 item-fields">
+  <div class="col-md-3">
+    <%= f.select :sku_code, SoukoZaiko.pluck(:sku_code, :sku_code).uniq, prompt: 'Choose a SKU', class: "form-control" %>
+  </div>
+  <div class="col-md-3">
+    <%= f.number_field :quantity, class: 'quantity form-control' %>
+  </div>
+  <div class="col-md-3">
+    <%= f.number_field :price, class: 'price form-control' %>
+  </div>
+  <div class="col-md-3">
+    <%= f.number_field :total_amount, class: 'amount form-control' %>
+  </div>
 </div>

@@ -113,6 +113,7 @@ GEM
     jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jpostcode (1.0.0.20240901)
     jquery-rails (4.6.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -279,6 +280,7 @@ DEPENDENCIES
   devise (~> 4.9)
   error_highlight (>= 0.4.0)
   jbuilder
+  jpostcode
   jquery-rails
   jsbundling-rails
   pg (~> 1.1)

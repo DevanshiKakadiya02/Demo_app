@@ -8,7 +8,7 @@ import * as bootstrap from "bootstrap"
 
 $(document).ready(function() {
   $('body').on('keyup', '.price', function(){
-    var raw = $(this).closest('.Row');
+    var raw = $(this).closest('.row');
     var price = $(this).val();
     var quantity = raw.find('.quantity').val();
     raw.find('.amount').val(price * quantity);
@@ -16,11 +16,38 @@ $(document).ready(function() {
   });
 
   $('body').on('keyup', '.quantity', function(){
-    var raw = $(this).closest('.Row');
+    var raw = $(this).closest('.row');
     var quantity = $(this).val();
     var price = raw.find('.price').val();
     raw.find('.amount').val(price * quantity);
     tax();
+  });
+
+  $('body').on('keyup', '#zipcode', function(){
+    var zipcode = $(this).val();
+    $.ajax({
+      url: '/orders/address-lookup',
+      method: 'GET',
+      data: { zipcode: zipcode },
+      dataType: 'json',
+      success: function(data) {
+        if (data) {
+          $('#city').val(data.city || '');
+          $('#state').val(data.state || '');
+          $('#area').val(data.area || '');
+        } else {
+          $('#city').val('');
+          $('#state').val('');
+          $('#area').val('');
+        }
+      },
+      error: function(xhr, status, error) {
+        console.log("Error: " + error);
+        $('#city').val('');
+        $('#state').val('');
+        $('#area').val('');
+      }
+    });
   });
 });
 
