@@ -1,12 +1,12 @@
 <div class="row mb-2 item-fields">
   <div class="col-md-3">
-    <%= f.select :sku_code, options_for_select(SoukoZaiko.all.map { |zaiko| ["#{zaiko.sku_code} [#{zaiko.stock}]", zaiko.sku_code, { disabled: zaiko.stock == 0 }] }), prompt: 'Choose a SKU', class: "form-control" %>
+    <%= f.select :sku_code, options_for_select(@souko_zaikos.map { |zaiko| ["#{zaiko.sku_code} [#{zaiko.stock}]", zaiko.sku_code, { disabled: zaiko.stock == 0, 'data-stock': zaiko.stock }] }), {}, { prompt: 'Choose a SKU', class: 'form-control order_sku_code' } %>
   </div>
   <div class="col-md-3">
-    <%= f.number_field :quantity, class: 'quantity form-control' %>
+    <%= f.number_field :quantity, class: 'quantity form-control', min: 1 %>
   </div>
   <div class="col-md-3">
-    <%= f.number_field :price, class: 'price form-control' %>
+    <%= f.number_field :price, class: 'price form-control', min: 1 %>
   </div>
   <div class="col-md-3">
     <div class="amount_display"><%= f.object.total_amount %></div>

@@ -4,6 +4,8 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_items, allow_destroy: true
   before_create :generate_order_number
 
+  validates :delivery_address, :delivery_area, :delivery_city, :delivery_zipcode, :delivery_state, :order_items, presence: true
+
   private
 
   def generate_order_number

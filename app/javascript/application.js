@@ -19,19 +19,25 @@ $(document).ready(function() {
 
   $('body').on('keyup', '#zipcode', function(){
     var zipcode = $(this).val();
-    $.ajax({
-      url: '/orders/address-lookup',
-      method: 'GET',
-      data: { zipcode: zipcode },
-      dataType: 'json',
-      success: function(data) {
-        updateAddressFields(data);
-      },
-      error: function(xhr, status, error) {
-        console.error("Error: " + error);
-        resetAddressFields();
-      }
-    });
+    resetAddressFields();
+    if (zipcode.length === 7) {
+      $.ajax({
+        url: '/orders/address-lookup',
+        method: 'GET',
+        data: { zipcode: zipcode },
+        dataType: 'script',
+        error: function(xhr, status, error) {
+          resetAddressFields();
+        }
+      });
+    };
+  });
+
+  $('body').on('change', '.order_sku_code', function() {
+    var raw = $(this).closest('.row');
+    var stock = $(this).find('option:selected').data('stock');
+    console.log('stock', stock)
+    raw.find('.quantity').attr('max', stock);
   });
 });
 
@@ -51,19 +57,19 @@ function tax() {
 }
 
 function updateAddressFields(data) {
-  var city = data.city || '';
-  var state = data.state || '';
-  var area = data.area || '';
+    var city = data.city || '';
+    var state = data.state || '';
+    var area = data.area || '';
 
-  $('#city').val(city);
-  $('#state').val(state);
-  $('#area').val(area);
-  $('#city_display').text(city);
-  $('#state_display').text(state);
-  $('#area_display').text(area);
-}
+    $('#city').val(city);
+    $('#state').val(state);
+    $('#area').val(area);
+    $('#city_display').text(city);
+    $('#state_display').text(state);
+    $('#area_display').text(area);
+  }
 
-function resetAddressFields() {
-  $('#city, #state, #area').val('');
-  $('#city_display, #state_display, #area_display').text('');
-}
+  function resetAddressFields() {
+    $('#city, #state, #area').val('');
+    $('#city_display, #state_display, #area_display').text('');
+  }

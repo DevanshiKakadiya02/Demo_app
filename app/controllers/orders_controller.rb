@@ -2,26 +2,29 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @order.order_items.build
+		@souko_zaikos = SoukoZaiko.all
   end
 
   def create
     @order = current_user.orders.new(order_params)
-    if @order.save!
+    if @order.save
       redirect_to new_order_path, notice: 'Order was successfully created.'
-    else
-      render :new
     end
   end
 
   def address_lookup
     address = Jpostcode.find(params[:zipcode])
+		@order = Order.new(delivery_zipcode: params[:zipcode])
+    @order.order_items.build
     address = address.first if address.class == Array
     if address.present?
-      render json: { city: address.city, state: address.prefecture, area: address.town }
-    else
-      render json: { city: nil, state: nil, area: nil }, status: :not_found
+			ew_flag = PrefectureCode.find_by(name: address.prefecture).ew_flag
+			@souko_zaikos = SoukoZaiko.where(warehouse_code: ew_flag.upcase)
+      @order.delivery_city = address.city
+			@order.delivery_state = address.prefecture
+			@order.delivery_area = address.town
     end
-  end 
+  end 	
 
   private
 
